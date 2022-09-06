@@ -8,7 +8,7 @@
  */
 
 create table carta(
-    id int auto_increment,
+    id int auto_increment primary key,
     codigo varchar(2) not null,
     nombre varchar(50) not null,
     imagen varchar(50) not null,
