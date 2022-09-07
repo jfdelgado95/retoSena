@@ -14,6 +14,6 @@ if ($nombre==null) header('location:../index.php?mensaje=Usuario o contraseña n
 else {
     session_start();
     $_SESSION['nombre']= serialize($nombre);
-    header('location:../principal.php?CONTENIDO=inicio.php');
+    header('location: ../principal.php?CONTENIDO=inicioJuego.php');
 }
 ?>

@@ -22,7 +22,7 @@ INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) 
 INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) VALUES ('3A', 'Barcelona','Barcelona.png','520000','32','12345');
 INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) VALUES ('4A', 'Bayern','Bayern.png','620000','12','14578');
 INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) VALUES ('1B', 'Benfica','Benfica.png','654800','47','2689');
-INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) VALUES ('2B', 'Brugge','Brugge.png','246160','17','45789');
+INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) VALUES ('2B', 'Sheriff','Sheriff.png','246160','17','45789');
 INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) VALUES ('3B', 'Brujas','Brujas.png','540235','6','14896');
 INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) VALUES ('4B', 'Celtic','Celtic.png','478925','24','62547');
 INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) VALUES ('1C', 'Chelsea','Chelsea.png','134668','45','89574');

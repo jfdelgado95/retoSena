@@ -6,6 +6,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
 -->
 <?php
 //require_once './principal.php';
+session_start();
+session_unset();
+session_destroy();
+$mensaje='';
+if (isset($_REQUEST['mensaje'])) $mensaje=$_REQUEST['mensaje'];
+
 ?>
 <html>
     <head>
@@ -21,28 +27,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
               <div class="card-body p-5 text-center">
 
                 <div class="mb-md-5 mt-md-4 pb-5">
+                <p><font color='red' ><?= $mensaje ?></font></p>  
+                    <form name="formulario" method='post' action='control/validar.php'>
+                    <h1 class="fw-bold mb-2 text-uppercase">Siigo Match Battle</h1>
+                    <h4>Ingrese sus datos:</h4><br><br>
+
+                    <div class="form-outline form-white">
+                        <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" />
+                        <label class="form-label" for="nombre">Nombre</label>                      
+                    </div><br>
                   
-                    <form name="formulario" method='post' action='inicioJuego.php'>
-                  <h1 class="fw-bold mb-2 text-uppercase">Siigo Match Battle</h1>
-                  <h4>Ingrese sus datos:</h4><br><br>
 
-                  <div class="form-outline form-white">
-                    <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" />
-                    <label class="form-label" for="nombre">Nombre</label>                      
-                  </div><br>
-                  
+                    <div class="form-outline form-white">
+                        <input type="password" id="clave" name="clave" class="form-control form-control-lg" />
+                        <label class="form-label" for="clave">Clave</label>
+                    </div><br>
 
-                  <div class="form-outline form-white">
-                    <input type="password" id="clave" name="clave" class="form-control form-control-lg" />
-                    <label class="form-label" for="clave">Clave</label>
-                  </div><br>
-
-                  <button class="btn btn-outline-light btn-lg px-5" type="submit">Entrar</button>
-                  <div></div><br>
-                  </form>
+                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Entrar</button>
+                    <div></div><br>
+                    </form>
                 <div>
-                  <p class="mb-0"><a href="#!" class="text-white-50 fw-bold">Crear usuario</a>
-                  </p>
+                    <p class="mb-0"><a href="#!" class="text-white-50 fw-bold">Crear usuario</a>
+                    </p>
                 </div>
 
               </div>

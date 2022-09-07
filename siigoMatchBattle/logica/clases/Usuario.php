@@ -111,7 +111,7 @@ class Usuario {
         $nombre = null;
         if (count($resultado) > 0){
             $nombre = $resultado[0];
-            //echo 'el usuario existe';
+            echo 'el usuario existe';
         }
         return $nombre;
     }

@@ -130,7 +130,7 @@ class Carta {
         return $lista;        
     }
     
-    public static function getArray(){
+    public static function getInfo(){
         $cadenaSQL= "select * from carta";
         $resultado= conectorBD::ejecutarQuery($cadenaSQL);
         return $resultado;                
