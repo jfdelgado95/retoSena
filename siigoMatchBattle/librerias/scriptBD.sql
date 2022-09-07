@@ -6,16 +6,36 @@
  * Author:  Sena
  * Created: 6/09/2022
  */
-
 create table carta(
-    id int auto_increment primary key,
-    codigo varchar(2) not null,
-    nombre varchar(50) not null,
-    imagen varchar(50) not null,
-    valor int not null,
-    titulo int not null,
-    jugador int not null
+	id int auto_increment primary key,
+	codigo varchar(2) not null,
+	nombre varchar(50) not null,
+	imagen varchar(50) not null,
+	valor int not null,
+	titulo int not null,
+	jugador int not null
 );
+
+create table partida(
+	id int auto_increment primary key
+);
+
+create table usuario(
+	id int auto_increment primary key,
+	partidaId int not null,
+	idSession varchar(30) not null,
+	tipo varchar(1) null
+);
+
+alter table usuario add foreign key(partidaId) references partida(id);
+
+create table cartaJugador(
+	id int auto_increment primary key,
+	idUsuario int not null,
+	cartas varchar(100)
+);
+
+alter table cartaJugador add foreign key(idUsuario) references usuario(id);
 
 INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) VALUES ('1A', 'Ajax','Ajax.png','145628','15','14785');
 INSERT INTO `carta`(`codigo`, `nombre`, `imagen`, `valor`, `titulo`, `jugador`) VALUES ('2A', 'Atletico de Madrid','AtleticoMadrid.png','568794','11','14578');

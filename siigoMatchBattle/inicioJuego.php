@@ -33,12 +33,16 @@ require_once './logica/clases/Carta.php';
         </table>
         <br>
         <form name="iniciar" method="post" action="principal.php?CONTENIDO=presentacion/configuracion/cartas.php">
-            
             <center>
-                <input type="text" name="jugadores" value="" placeholder="Ingrese el número de jugadores" size="50">
-                <br>
-                <br>
-                <input type="submit" name="iniciarPartida" value="Iniciar" size="250" style="width:600px;height:100px;">
+            <select name="jugadores" value="Numero de jugadores:">    
+                <option value="2">2 jugadores</option>    
+                <option value="3">3 jugadores</option>    
+                <option value="4" selected>4 jugadores</option>    
+                <option value="5">5 jugadores</option>    
+                <option value="6">6 jugadores</option>
+                <option value="7">7 jugadores</option>
+            </select>
+            <input type="submit" name="iniciarPartida" value="Iniciar" size="250" style="width:600px;height:100px;">
             </center>
         </form>
     </div>
