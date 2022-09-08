@@ -17,7 +17,9 @@ create table carta(
 );
 
 create table partida(
-	id int auto_increment primary key
+    id int auto_increment primary key,
+    codigo varchar(6) not null,
+    jugadores int not null
 );
 
 create table usuario(

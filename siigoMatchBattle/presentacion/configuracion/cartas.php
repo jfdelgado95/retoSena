@@ -1,56 +1,110 @@
 <?php
+$servername = "localhost";
+$username = "adsi";
+$password = "utilizar";
+$dbname = "siigomatchbattle";
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
-//require_once '../../logica/clasesGenericas/conectorBD.php';
-
-
-$jugadores=$_REQUEST['jugadores'];
-$cartas=32/$jugadores;
-
-$arrayID= array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31);
-shuffle($arrayID);
-//Se mezcla y se reparte la baraja en los jugadores
-$barajaRepartida = array_chunk($arrayID,floor($cartas), true);
-
-for ($n = 0; $n < $jugadores; $n++) {
-    ${"cartasJugador".$n}= $barajaRepartida[$n];
-    print_r(${"cartasJugador".$n});
-    echo '<br>';
+// Creacion de la conexon
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Verificacion de la conexion
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
 }
-$cadenaSQL = "select * from carta where id=$cartasJugador0[0]";//select de la carta que se muestra segun el id
+//Fin conexion
+
+$codigoPartida= $_REQUEST['codigo'];
+$jugadores= $_REQUEST['jugadores'];
+
+echo $codigoPartida;
+echo $jugadores;
+
+/*
+//print_r ($_REQUEST['sesionId']);
+if ($_REQUEST['codigo']!==null){
+    //echo $_REQUEST['sesionId'];
+    $cadenaSQL= "select jugadores from partida where codigo='".$_REQUEST['codigo']."'";
+    $result= $conn->query($cadenaSQL);
+}
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    $cuenta = $row["jugadores"];
+    //echo "Código: ".$row["ca_codJugador"]." - Jugadores: ".$row["ca_numJugador"]."<br>";
+  }
+} else {
+  echo "Sin resultados";
+}
+
+echo "<br>";
+//print_r ($cuenta);
+if ($cuenta>=1 && $cuenta<7){
+    //echo "Mensaje";
+    $cadenaSQL= "update partida set jugadores=".($cuenta+1)." where codigo='".$_REQUEST['codigo']."'";
+    $resultado= $conn->query($cadenaSQL);
+    //echo $cadenaSQL;
+}else {
+    $jugadores=7;
+}
+*/
+//$jugadores=$_REQUEST['jugadores'];
+$cartas=floor(32/$jugadores);
+
+echo "<br>";
+$num= array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31);
+$cartasJugador0= array();
+$cartasJugador1= array();
+$cartasJugador2= array();
+$cartasJugador3= array();
+$cartasJugador4= array();
+$cartasJugador5= array();
+$cartasJugador6= array();
+$control=0;
+
+for ($j = 0; $j < $jugadores; $j++) {
+    for ($i = 0; $i < $cartas; $i++) {
+        shuffle($num);
+        array_push(${"cartasJugador".$j}, $num[0]);
+        $clave= array_search($num[0], $num);
+        unset($num[$clave]);
+    }
+    //echo "<br>";
+    //print_r(${"cartasJugador".$j});
+}
 
 $lista = '';
-$resultado = conectorBD::ejecutarQuery($cadenaSQL);
-//print_r($resultado);
-//print_r($resultado['0']['1']);
-$lista.= '<tr>';
-$lista.= "<th colspan='3'>{$resultado['0']['0']}</th>";
-$lista.= '</tr>';
-$lista.= '<tr>';
-$lista.= "<td colspan='3' align='center'><img src='presentacion/imagenes/logos/{$resultado['0']['3']}' width='200' height='200'/></td>";
-$lista.= '</tr>';
-$lista.= '<tr>';
-$lista.= "<td colspan='3'>{$resultado['0']['2']}</td>";
-$lista.= '</tr>';
-$lista.="<tr>";
-$lista.="<th>Valor del equipo (Euros)</th>";
-$lista.="<td>{$resultado['0']['4']}</td>";
-$lista .= "<td><a href='?id={$resultado['0']['0']}&atributo={$resultado['0']['4']}' title='Seleccionar atributo'><img src='presentacion/imagenes/update.png'></a></td>";
-$lista.="</tr>";
-$lista.="<tr>";
-$lista.="<th>Titulos del equipo</td>";
-$lista.="<td>{$resultado['0']['5']}</th>";
-$lista.= "<td><a href='?id={$resultado['0']['0']}&atributo={$resultado['0']['5']}' title='Seleccionar atributo'><img src='presentacion/imagenes/update.png'></a></td>";
-$lista.="</tr>";
-$lista.="<tr>";
-$lista.="<th>Jugador mas valioso (Euros)</th>";
-$lista.="<td>{$resultado['0']['6']}</td>";
-$lista.= "<td><a href='?id={$resultado['0']['0']}&atributo={$resultado['0']['6']}' title='Seleccionar atributo'><img src='presentacion/imagenes/update.png'></a></td>";
-$lista.="</tr>";
-
+for ($i = 0; $i < $jugadores; $i++) {
+    //for ($j = 0; $j < $cartas; $j++) {
+        $cadenaSQL = "select * from carta where id='".${"cartasJugador".$i}[0]."'";//select de la carta que se muestra segun el id
+        //echo $cadenaSQL;
+        $resultado = conectorBD::ejecutarQuery($cadenaSQL);
+        $lista.= '<tr>';
+        $lista.= "<th colspan='3'>{$resultado['0']['1']}</th>";
+        $lista.= '</tr>';
+        $lista.= '<tr>';
+        $lista.= "<td colspan='3' align='center'><img src='presentacion/imagenes/logos/{$resultado['0']['3']}' width='200' height='200'/></td>";
+        $lista.= '</tr>';
+        $lista.= '<tr>';
+        $lista.= "<td colspan='3'>{$resultado['0']['2']}</td>";
+        $lista.= '</tr>';
+        $lista.="<tr>";
+        $lista.="<th>Valor del equipo (Euros)</th>";
+        $lista.="<td>{$resultado['0']['4']}</td>";
+        $lista .= "<td><a href='?id={$resultado['0']['0']}&atributo={$resultado['0']['4']}' title='Seleccionar atributo'><img src='presentacion/imagenes/update.png'></a></td>";
+        $lista.="</tr>";
+        $lista.="<tr>";
+        $lista.="<th>Titulos del equipo</td>";
+        $lista.="<td>{$resultado['0']['5']}</th>";
+        $lista.= "<td><a href='?id={$resultado['0']['0']}&atributo={$resultado['0']['5']}' title='Seleccionar atributo'><img src='presentacion/imagenes/update.png'></a></td>";
+        $lista.="</tr>";
+        $lista.="<tr>";
+        $lista.="<th>Jugador mas valioso (Euros)</th>";
+        $lista.="<td>{$resultado['0']['6']}</td>";
+        $lista.= "<td><a href='?id={$resultado['0']['0']}&atributo={$resultado['0']['6']}' title='Seleccionar atributo'><img src='presentacion/imagenes/update.png'></a></td>";
+        $lista.="</tr>";
+    //}
+}
+/*
 $cadenaSQL = "select * from carta where id=$cartasJugador1[8]";//select de la carta que se muestra segun el id
 
 $lista2= '';
@@ -143,7 +197,7 @@ $lista4.="<th>Jugador mas valioso (Euros)</th>";
 $lista4.="<td>{$resultado['0']['6']}</td>";
 $lista4.= "<td><a href='?id={$resultado['0']['0']}&atributo={$resultado['0']['6']}' title='Seleccionar atributo'><img src='presentacion/imagenes/update.png'></a></td>";
 $lista4.="</tr>";
-
+*/
 ?>
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -169,7 +223,7 @@ $lista4.="</tr>";
                 <div class="col-md-4">
                         <div>
                         <table class="table table-bordered">
-                        <?=$lista2?>
+                        <?=$lista?>
                         </table>
                         </div>
                 </div>
@@ -194,14 +248,14 @@ $lista4.="</tr>";
             	<div class="col-md-4">
                 	<div>
                     	<table class="table table-bordered">
-                    	<?=$lista3?>
+                    	<?=$lista?>
                     	</table>
                 	</div>
             	</div>
             	<div class="col-md-4">
                 	<div>
                     	<table class="table table-bordered">
-                    	<?=$lista4?>
+                    	<?=$lista?>
                     	</table>
                 	</div>
             	</div>

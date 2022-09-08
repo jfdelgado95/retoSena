@@ -20,7 +20,7 @@ require_once './logica/clasesGenericas/conectorBD.php';
     <body onload="iniciar">
         <div class="container">
         <div id='banner'> 
-            <h3 align="center" valign="center">Inicio de partida</h3>
+            <h3 align="center" valign="center"></h3>
         </div>
             <div id="reloj" />
             <div id="tiempo">
