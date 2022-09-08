@@ -36,11 +36,11 @@ for ($j = 0; $j < $jugadores; $j++) {
     //echo "<br>";
     //print_r(${"cartasJugador".$j});
 }
-print_r($cartasJugador0);
+//print_r($cartasJugador0);
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
+<body style="background-color: #c1e8f7;">
     <div class="container">
         <div class="jumbotron mb-2 p-md-5 text-white" style="background-color:#343a40">      
             <center><h1 class="display-4">Inicio del juego</h1></center>                       
