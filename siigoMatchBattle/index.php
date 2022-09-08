@@ -38,8 +38,8 @@ function generarCodigoPartida($input, $strength = 16) {
 }
 $codigoPartida= generarCodigoPartida($permitted_chars, 6);
 
-
-$jugadores=7;
+//Codigo para barajar y repartir las cartas
+$jugadores=3;
 $cartas=floor(32/$jugadores);
 echo "<br>";
 $num= array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31);
@@ -62,35 +62,23 @@ for ($j = 0; $j < $jugadores; $j++) {
     echo "<br>";
     print_r(${"cartasJugador".$j});
 }
+//Fin codigo para barajar y repartir las cartas
 
+echo "<br>";
+
+//Codigo para determinar quien comienza a jugar
 $bandera=false;
-
+$cartaInicio=0;
 for ($j = 0; $j < $jugadores; $j++) {
     for ($i = 0; $i < $cartas; $i++) {
-        
-        if(${"cartasJugador".$j}[$i]==0){
+        if(${"cartasJugador".$j}[$i]==$cartaInicio){
+            $bandera=true;
             echo "Debe comenzar el jugador".$j+1;
-            $bandera=true;
-            break;
-            break;
-            
+            $cartaInicio++;
         }
     }
 }
-
-if($bandera==false){
-    for ($j = 0; $j < $jugadores; $j++) {
-    for ($i = 0; $i < $cartas; $i++) {
-        
-        if(${"cartasJugador".$j}[$i]==1){
-            echo"La carta 1B la tiene el jugardo ". $j;
-            $bandera=true;
-            break;
-            break;            
-        }
-    }
-}
-}
+//Fin codigo para determinar quien comienza a jugar
 
 $valor= array();
 for ($j = 0; $j < $jugadores; $j++) {

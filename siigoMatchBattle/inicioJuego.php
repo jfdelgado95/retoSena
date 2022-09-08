@@ -25,7 +25,6 @@ $cartasJugador3= array();
 $cartasJugador4= array();
 $cartasJugador5= array();
 $cartasJugador6= array();
-$control=0;
 
 for ($j = 0; $j < $jugadores; $j++) {
     for ($i = 0; $i < $cartas; $i++) {
@@ -34,9 +33,10 @@ for ($j = 0; $j < $jugadores; $j++) {
         $clave= array_search($num[0], $num);
         unset($num[$clave]);
     }
-    echo "<br>";
-    print_r(${"cartasJugador".$j});
+    //echo "<br>";
+    //print_r(${"cartasJugador".$j});
 }
+print_r($cartasJugador0);
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -66,13 +66,29 @@ for ($j = 0; $j < $jugadores; $j++) {
         <br>
         <form name="iniciar" method="post" action="principal.php?CONTENIDO=presentacion/configuracion/cartas.php">
             <center>
-                <input type="hidden" name="cartasJugador0" value="<?= $cartasJugador0 ?>">
-                <input type="hidden" name="cartasJugador1" value="<?= $cartasJugador1 ?>">
-                <input type="hidden" name="cartasJugador2" value="<?= $cartasJugador2 ?>">
-                <input type="hidden" name="cartasJugador3" value="<?= $cartasJugador3 ?>">
-                <input type="hidden" name="cartasJugador4" value="<?= $cartasJugador4 ?>">
-                <input type="hidden" name="cartasJugador5" value="<?= $cartasJugador5 ?>">
-                <input type="hidden" name="cartasJugador6" value="<?= $cartasJugador6 ?>">
+            <?php
+                foreach($cartasJugador0 as $valor) {
+                    echo '<input type="hidden" name="resultado0[]" value="'.$valor.'">';
+                }
+                foreach($cartasJugador1 as $valor) {
+                    echo '<input type="hidden" name="resultado1[]" value="'.$valor.'">';
+                }
+                foreach($cartasJugador2 as $valor) {
+                    echo '<input type="hidden" name="resultado2[]" value="'.$valor.'">';
+                }
+                foreach($cartasJugador3 as $valor) {
+                    echo '<input type="hidden" name="resultado3[]" value="'.$valor.'">';
+                }
+                foreach($cartasJugador4 as $valor) {
+                    echo '<input type="hidden" name="resultado4[]" value="'.$valor.'">';
+                }
+                foreach($cartasJugador5 as $valor) {
+                    echo '<input type="hidden" name="resultado5[]" value="'.$valor.'">';
+                }
+                foreach($cartasJugador6 as $valor) {
+                    echo '<input type="hidden" name="resultado6[]" value="'.$valor.'">';
+                }
+            ?>
                 <input type="hidden" name="codigo" value="<?= $codigoPartida ?>">
                 <input type="hidden" name="jugadores" value="<?= $jugadores ?>">
                 <input type="submit" name="iniciarPartida" value="Iniciar" size="250" style="width:600px;height:100px;">

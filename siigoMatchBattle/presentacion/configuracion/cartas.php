@@ -15,8 +15,8 @@ if ($conn->connect_error) {
 $codigoPartida= $_REQUEST['codigo'];
 $jugadores= $_REQUEST['jugadores'];
 
-echo $codigoPartida;
-echo $jugadores;
+//echo $codigoPartida;
+//echo $jugadores;
 
 /*
 //print_r ($_REQUEST['sesionId']);
@@ -46,9 +46,6 @@ if ($cuenta>=1 && $cuenta<7){
 }else {
     $jugadores=7;
 }
-*/
-//$jugadores=$_REQUEST['jugadores'];
-$cartas=floor(32/$jugadores);
 
 echo "<br>";
 $num= array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31);
@@ -71,11 +68,79 @@ for ($j = 0; $j < $jugadores; $j++) {
     //echo "<br>";
     //print_r(${"cartasJugador".$j});
 }
+*/
+$jugadores=$_REQUEST['jugadores'];
+$cartas=floor(32/$jugadores);
+
+if (isset($_POST)) {
+    for ($i = 0; $i < $jugadores; $i++) {
+        ${"cartasJugador$i"}= $_POST["resultado$i"];
+    }
+}
+
+//Codigo para determinar quien comienza a jugar
+$bandera=false;
+$cartaInicio=0;
+for ($j = 0; $j < $jugadores; $j++) {
+    for ($i = 0; $i < $cartas; $i++) {
+        if(${"cartasJugador".$j}[$i]==$cartaInicio){
+            $bandera=true;
+            echo "<br>";
+            echo "<br>";
+            echo "<h3 align='center'>Debe comenzar el jugador ".$j."</h3>";
+            echo "<br>";
+            echo "<br>";
+            $cartaInicio++;
+        }
+    }
+}
+//Fin codigo para determinar quien comienza a jugar
+/*
+//Muestra los equipos de cada jugador
+$nombre= array();
+for ($j = 0; $j < $jugadores; $j++) {
+    for ($i = 0; $i < $cartas; $i++) {
+        $cadenaSQL= "select nombre from carta where id='".${"cartasJugador".$j}[0]."'";
+        $result= $conn->query($cadenaSQL);
+        echo $cadenaSQL;
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                array_push($nombre, $row["nombre"]);
+            }
+        } 
+    }
+}
+print_r($nombre);
+//Fin muestra los equipos de cada jugador
+*/
+$valor= array();
+for ($j = 0; $j < $jugadores; $j++) {
+    $cadenaSQL= "select valor from carta where id='".${"cartasJugador".$j}[0]."'";
+    $result= $conn->query($cadenaSQL);
+    //echo $cadenaSQL;
+    
+/*
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            array_push($valor, $row["valor"]);
+            //$valor. = $row["valor"];
+            //echo "Código: ".$row["ca_codJugador"]." - Jugadores: ".$row["ca_numJugador"]."<br>";
+        }
+    }
+ * 
+ */ 
+    
+}
 
 $lista = '';
 for ($i = 0; $i < $jugadores; $i++) {
     //for ($j = 0; $j < $cartas; $j++) {
-        $cadenaSQL = "select * from carta where id='".${"cartasJugador".$i}[0]."'";//select de la carta que se muestra segun el id
+        //print_r(${"cartasJugador$i"});
+        //echo "<br>";
+        $idBuscado= ${"cartasJugador$i"}[0];
+        $cadenaSQL = "select * from carta where id=$idBuscado";//select de la carta que se muestra segun el id
         //echo $cadenaSQL;
         $resultado = conectorBD::ejecutarQuery($cadenaSQL);
         $lista.= '<tr>';
@@ -203,6 +268,7 @@ $lista4.="</tr>";
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+    <h3>JUEGO EN PROGRESO</h3>
     <div class="container-fluid">
     <br>
     	<div class="container-fluid">
